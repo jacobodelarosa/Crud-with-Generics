@@ -7,13 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{04
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Travels", "Travels", "{C551784B-A46E-41D0-A059-EFD36372729D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travels.WebApi", "Services\Travels\Travels.WebApi\Travels.WebApi.csproj", "{6675615E-6991-4CBE-852F-31D26F5069FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travels.WebApi", "src\Services\Travels\Travels.WebApi\Travels.WebApi.csproj", "{6675615E-6991-4CBE-852F-31D26F5069FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travels.Domain", "Services\Travels\Travels.Domain\Travels.Domain.csproj", "{05339E6F-4364-4E01-A43C-BBD229754C70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travels.Domain", "src\Services\Travels\Travels.Domain\Travels.Domain.csproj", "{05339E6F-4364-4E01-A43C-BBD229754C70}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travels.Application", "Services\Travels\Travels.Application\Travels.Application.csproj", "{96B76FF4-A3A2-479C-B689-0DFD763FF963}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travels.Application", "src\Services\Travels\Travels.Application\Travels.Application.csproj", "{96B76FF4-A3A2-479C-B689-0DFD763FF963}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travels.Persistence", "Services\Travels\Travels.Persistence\Travels.Persistence.csproj", "{7DD8D03D-03B1-4AF2-966B-BC418E1745F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travels.Persistence", "src\Services\Travels\Travels.Persistence\Travels.Persistence.csproj", "{7DD8D03D-03B1-4AF2-966B-BC418E1745F0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8482DE86-BF09-4804-BD50-57F7CC1B8678}"
 EndProject

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Travels.Domain.SeedWork;
 using Travels.Persistence;
@@ -8,7 +10,17 @@ namespace Travels.WebApi.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddConfigurationApplication(this IServiceCollection services)
+        public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
+            => services
+                .AddDbContextPool<MainDbContext>((serviceProvider, options) =>
+                {
+                    options.UseApplicationServiceProvider(serviceProvider);
+                    options.UseNpgsql(configuration.GetConnectionString("MainDbContext"));
+                })
+               .AddScoped(provider => (DbContext)provider.GetService<MainDbContext>())
+               .AddScoped<IUnitOfWork>(provider => provider.GetService<MainDbContext>());
+
+        public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
             var namespacePrefix = $"{nameof(Travels)}";
 
@@ -17,8 +29,6 @@ namespace Travels.WebApi.Extensions
             var domainAssembly = Assembly.Load(new AssemblyName($"{namespacePrefix}.{nameof(Domain)}"));
 
             return services
-                .AddScoped(provider => (DbContext)provider.GetService<MainDbContext>())
-                .AddScoped<IUnitOfWork>(provider => provider.GetService<MainDbContext>())
                 .Scan(typeSourceSelector => typeSourceSelector
                     .FromAssemblies(applicationAssembly, persistenceAssembly, domainAssembly)
                         .AddClasses()
@@ -26,5 +36,16 @@ namespace Travels.WebApi.Extensions
                             .WithScopedLifetime()
                 );
         }
+
+        public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
+            => services
+                .AddSwaggerGen(options =>
+                {
+                    options.SwaggerDoc("1.0.0", new OpenApiInfo
+                    {
+                        Title = "Travels Api",
+                        Version = "1.0.0"
+                    });
+                });
     }
 }

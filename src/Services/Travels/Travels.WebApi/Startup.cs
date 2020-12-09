@@ -18,21 +18,10 @@ namespace Travels.WebApi
 
         public void ConfigureServices(IServiceCollection services)
           => services
-                .AddConfigurationApplication()
-                .AddDbContextPool<MainDbContext>((serviceProvider, options) =>
-                {
-                    options.UseApplicationServiceProvider(serviceProvider);
-                    options.UseNpgsql(Configuration.GetConnectionString("MainDbContext"));
-                })
+                .AddCustomDbContext(Configuration)
                 .AddRouting(options => options.LowercaseUrls = true)
-                .AddSwaggerGen(options =>
-                {
-                    options.SwaggerDoc("1.0.0", new OpenApiInfo
-                    {
-                        Title = "Travels Api",
-                        Version = "1.0.0"
-                    });
-                })
+                .AddCustomServices()
+                .AddCustomSwagger()
                 .AddControllers();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
