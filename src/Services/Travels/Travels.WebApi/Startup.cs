@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using Travels.Persistence;
 using Travels.WebApi.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace Travels.WebApi
 {
@@ -25,7 +26,23 @@ namespace Travels.WebApi
                 .AddControllers();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-            => app.UseSwagger()
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<MainDbContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
+
+            app.UseSwagger()
                 .UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/1.0.0/swagger.json", "Travels Api Docs");
@@ -36,5 +53,6 @@ namespace Travels.WebApi
                 {
                     endpoints.MapControllers();
                 });
+        }
     }
 }

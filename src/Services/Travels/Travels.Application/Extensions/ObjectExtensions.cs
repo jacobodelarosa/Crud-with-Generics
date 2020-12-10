@@ -5,6 +5,9 @@
         public static TTarget Inject<TTarget>(this object source)
             where TTarget : new()
         {
+            if (source == null)
+                return default;
+
             var target = new TTarget();
             var sourceProperties = source.GetType().GetProperties();
             

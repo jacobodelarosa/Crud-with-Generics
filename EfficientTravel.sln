@@ -15,7 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travels.Application", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travels.Persistence", "src\Services\Travels\Travels.Persistence\Travels.Persistence.csproj", "{7DD8D03D-03B1-4AF2-966B-BC418E1745F0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8482DE86-BF09-4804-BD50-57F7CC1B8678}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docker", ".docker", "{1429E5E0-B1C3-4F2D-B2E9-1BBFBC1802A8}"
+	ProjectSection(SolutionItems) = preProject
+		.docker\docker-compose.override.yml = .docker\docker-compose.override.yml
+		.docker\docker-compose.yml = .docker\docker-compose.yml
+		.docker\initdb.sh = .docker\initdb.sh
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

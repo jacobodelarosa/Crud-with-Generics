@@ -1,0 +1,9 @@
+# docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+version: '3.8'
+services:
+  ############################
+  # PostgresQL component
+  ############################
+  postgresql:
+    image: postgres:13-alpine
+    container_name: postgresql
