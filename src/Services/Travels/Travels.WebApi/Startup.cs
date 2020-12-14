@@ -18,7 +18,7 @@ namespace Travels.WebApi
             => Configuration = configuration;
 
         public void ConfigureServices(IServiceCollection services)
-          => services
+            => services
                 .AddCustomDbContext(Configuration)
                 .AddRouting(options => options.LowercaseUrls = true)
                 .AddCustomServices()
@@ -36,10 +36,8 @@ namespace Travels.WebApi
                 .GetRequiredService<IServiceScopeFactory>()
                 .CreateScope())
             {
-                using (var context = serviceScope.ServiceProvider.GetService<MainDbContext>())
-                {
-                    context.Database.Migrate();
-                }
+                using var context = serviceScope.ServiceProvider.GetService<MainDbContext>();
+                context.Database.Migrate();
             }
 
             app.UseSwagger()
